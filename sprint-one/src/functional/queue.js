@@ -1,3 +1,4 @@
+// fast but terrible on mem over time.  For repeated use.
 var Queue = function(){
   var someInstance = {};
 
@@ -42,3 +43,44 @@ var Queue = function(){
 
   return someInstance;
 };
+
+// alternate implementaion with a for loop.  optimized for longevity and mem usage
+
+var Queue = function(){
+  var someInstance = {};
+
+  // Use an object with numeric keys to store values
+  var storage = {};
+  // size is the actual amount of elements in the queue;
+  var size = 0;
+  
+  
+  someInstance.enqueue = function(value){
+    // save the value to storage at the last index
+    storage[size] = value;
+    // increment the size
+    size++;
+  };
+
+  someInstance.dequeue = function(){
+    if (size > 0) {
+
+      var returnValue = storage[0];
+      size --;
+      for (var i = 0; i < size; i++) {
+        storage[i] = storage[i+1];
+      }
+      storage[size] = undefined;
+        return returnValue;
+    }
+  };
+
+  someInstance.size = function(){
+    return size;
+  };
+
+  return someInstance;
+};
+
+
+
