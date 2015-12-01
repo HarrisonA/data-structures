@@ -3,16 +3,41 @@ var Queue = function(){
 
   // Use an object with numeric keys to store values
   var storage = {};
-
+  // size is the actual amount of elements in the queue;
+  var size = 0;
+  // define a var to store the position of the end of the queue.
+  var lastElementIndex = 0;
+  // define a var to store the position of the front of the queue.
+  var firstElementIndex = 0;
   // Implement the methods below
-
+  // adds a value to the front of the queue.
   someInstance.enqueue = function(value){
+    // save the value to storage at the last index
+    storage[lastElementIndex] = value;
+    // increment the end of the que
+    lastElementIndex++;
+    // increment the size
+    size++;
   };
 
   someInstance.dequeue = function(){
+    // check if there are elements to dequeue by checking if the lastElementIndex higher than the firstElementIndex. Which means we've queued more items than we've dequeued
+    if (lastElementIndex > firstElementIndex) {
+      // save the value at the front of the queue.
+      var returnValue = storage[firstElementIndex];
+      // remove the value from the front of the queue.
+      storage[firstElementIndex] = undefined;
+      // increment the firstElement var to the next element in the queue. 
+      firstElementIndex ++;
+      // decrement the size;
+      size--;
+      // return the dequeued value;
+      return returnValue;
+    }
   };
 
   someInstance.size = function(){
+    return size;
   };
 
   return someInstance;
