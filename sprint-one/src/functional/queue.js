@@ -58,7 +58,7 @@ var Queue = function(){
   someInstance.enqueue = function(value){
     // save the value to storage at the last index
     storage[size] = value;
-    // increment the size
+    // increment the size;
     size++;
   };
 

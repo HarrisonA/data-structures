@@ -13,7 +13,6 @@ var extend = function(to, from){
   for (var key in from){
     to[key]=from[key];
   }
-  console.log(to);
 };
 
 var stackMethods = {};
